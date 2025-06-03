@@ -8,6 +8,8 @@ import { Button } from "@/components/ui/button";
 import { Loader2, Search, Filter, ShoppingCart } from "lucide-react";
 import { useCart } from "@/contexts/CartContext";
 import { toast } from "sonner";
+import { Link } from 'react-router-dom';
+import Breadcrumb from '@/components/Breadcrumb'; // Importa el componente Breadcrumb
 
 const Products = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -17,12 +19,17 @@ const Products = () => {
   const { data: products, isLoading, error } = useQuery({
     queryKey: ['products'],
     queryFn: async () => {
+      console.log("Attempting to fetch products...");
       const { data, error } = await supabase
         .from('products')
         .select('*')
         .order('name');
-      
-      if (error) throw error;
+
+      if (error) {
+        console.error("Supabase fetch error:", error);
+        throw error;
+      }
+      console.log("Products fetched successfully:", data);
       return data;
     },
   });
@@ -37,7 +44,7 @@ const Products = () => {
   // Filter products based on search term and selected category
   const filteredProducts = useMemo(() => {
     if (!products) return [];
-    
+
     return products.filter(product => {
       const matchesSearch = product.name.toLowerCase().includes(searchTerm.toLowerCase());
       const matchesCategory = selectedCategory === "all" || product.category === selectedCategory;
@@ -50,14 +57,14 @@ const Products = () => {
       toast.error("This product doesn't have a price set");
       return;
     }
-    
+
     addToCart({
       id: product.id,
       name: product.name,
       price: product.price,
       image_url: product.image_url
     });
-    
+
     toast.success(`${product.name} added to cart!`);
   };
 
@@ -70,11 +77,13 @@ const Products = () => {
   }
 
   if (error) {
+    console.error("Error fetching products:", error);
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <h2 className="text-2xl font-bold text-red-600 mb-2">Error Loading Products</h2>
           <p className="text-gray-600">Please try again later</p>
+          <p className="text-gray-600">Error details: {error.message}</p>
         </div>
       </div>
     );
@@ -87,7 +96,12 @@ const Products = () => {
           <h1 className="text-4xl font-bold text-gray-900 mb-4">Buy n Large Marketplace</h1>
           <p className="text-xl text-gray-600">Everything you need, delivered to your door</p>
         </div>
-        
+
+        {/* Add Breadcrumb here */}
+        <div className="mb-4">
+          <Breadcrumb items={[{ label: 'Home', path: '/' }, { label: 'Products', path: '/products' }]} />
+        </div>
+
         {/* Filter and Search Controls */}
         <div className="mb-8 flex flex-col sm:flex-row gap-4 max-w-2xl mx-auto">
           <div className="relative flex-1">
@@ -100,7 +114,7 @@ const Products = () => {
               className="pl-10"
             />
           </div>
-          
+
           <div className="flex items-center gap-2 sm:w-64">
             <Filter className="h-4 w-4 text-gray-400" />
             <Select value={selectedCategory} onValueChange={setSelectedCategory}>
@@ -133,51 +147,59 @@ const Products = () => {
             </p>
           </div>
         )}
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {filteredProducts?.map((product) => (
-            <Card key={product.id} className="hover:shadow-lg transition-shadow">
-              {product.image_url && (
-                <div className="aspect-square overflow-hidden rounded-t-lg">
+            <Link to={`/products/${product.id}`} key={product.id}>
+              <Card className="hover:shadow-lg transition-shadow flex flex-col cursor-pointer">
+                <div className="aspect-square overflow-hidden rounded-t-lg bg-gray-200 flex items-center justify-center">
                   <img
-                    src={product.image_url}
+                    src={product.image_url || "/placeholder.svg"}
                     alt={product.name}
                     className="w-full h-full object-cover hover:scale-105 transition-transform"
+                    onError={(e) => {
+                      e.currentTarget.src = "/placeholder.svg";
+                    }}
                   />
                 </div>
-              )}
-              <CardHeader>
-                <CardTitle className="text-lg">{product.name}</CardTitle>
-                {product.category && (
-                  <p className="text-sm text-blue-600 font-medium">{product.category}</p>
-                )}
-              </CardHeader>
-              <CardContent className="space-y-3">
-                {product.description && (
-                  <CardDescription>
-                    {product.description}
-                  </CardDescription>
-                )}
-                <div className="flex items-center justify-between">
-                  {product.price && (
-                    <div className="text-2xl font-bold text-green-600">
-                      ${product.price}
-                    </div>
+                <CardHeader className="flex-grow">
+                  <CardTitle className="text-lg truncate">{product.name}</CardTitle>
+                  {product.category && (
+                    <p className="text-sm text-blue-600 font-medium">{product.category}</p>
                   )}
-                  <Button
-                    onClick={() => handleAddToCart(product)}
-                    className="bg-blue-600 hover:bg-blue-700"
-                    disabled={!product.price}
-                  >
-                    <ShoppingCart className="h-4 w-4 mr-2" />
-                    Add to Cart
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
+                </CardHeader>
+                <CardContent className="space-y-3 pt-0">
+                  {product.description && (
+                    <CardDescription className="line-clamp-2">
+                      {product.description}
+                    </CardDescription>
+                  )}
+                  <div className="flex items-center justify-between mt-auto">
+                    {product.price && (
+                      <div className="text-2xl font-bold text-green-600">
+                        ${product.price}
+                      </div>
+                    )}
+                    <Button
+                      type="button"
+                      onClick={(e) => {
+                        e.preventDefault(); // Evita que el botón siga el link
+                        handleAddToCart(product);
+                      }}
+                      className="bg-blue-600 hover:bg-blue-700"
+                      disabled={!product.price}
+                    >
+                      <ShoppingCart className="h-4 w-4 mr-2" />
+                      Add to Cart
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+            </Link>
+
           ))}
         </div>
-        
+
         {filteredProducts.length === 0 && products && products.length > 0 && (
           <div className="text-center py-12">
             <h3 className="text-xl font-semibold text-gray-700 mb-2">No products found</h3>

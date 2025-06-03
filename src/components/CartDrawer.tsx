@@ -44,9 +44,12 @@ const CartDrawer = ({ children }: CartDrawerProps) => {
                   <div key={item.id} className="flex items-center gap-3 p-4 border rounded-lg">
                     {item.image_url && (
                       <img
-                        src={item.image_url}
+                        src={item.image_url || '/placeholder.svg'}
                         alt={item.name}
-                        className="w-16 h-16 object-cover rounded-md"
+                        className="h-16 w-16 rounded-md object-cover"
+                        onError={(e) => {
+                          e.currentTarget.src = '/placeholder.svg';
+                        }}
                       />
                     )}
                     <div className="flex-1 min-w-0">
