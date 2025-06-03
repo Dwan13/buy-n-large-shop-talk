@@ -1,15 +1,18 @@
-
 import { useQuery } from "@tanstack/react-query";
 import { useState, useMemo } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Loader2, Search, Filter } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Loader2, Search, Filter, ShoppingCart } from "lucide-react";
+import { useCart } from "@/contexts/CartContext";
+import { toast } from "sonner";
 
 const Products = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
+  const { addToCart } = useCart();
 
   const { data: products, isLoading, error } = useQuery({
     queryKey: ['products'],
@@ -41,6 +44,22 @@ const Products = () => {
       return matchesSearch && matchesCategory;
     });
   }, [products, searchTerm, selectedCategory]);
+
+  const handleAddToCart = (product: any) => {
+    if (!product.price) {
+      toast.error("This product doesn't have a price set");
+      return;
+    }
+    
+    addToCart({
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      image_url: product.image_url
+    });
+    
+    toast.success(`${product.name} added to cart!`);
+  };
 
   if (isLoading) {
     return (
@@ -117,7 +136,7 @@ const Products = () => {
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {filteredProducts?.map((product) => (
-            <Card key={product.id} className="hover:shadow-lg transition-shadow cursor-pointer">
+            <Card key={product.id} className="hover:shadow-lg transition-shadow">
               {product.image_url && (
                 <div className="aspect-square overflow-hidden rounded-t-lg">
                   <img
@@ -133,17 +152,27 @@ const Products = () => {
                   <p className="text-sm text-blue-600 font-medium">{product.category}</p>
                 )}
               </CardHeader>
-              <CardContent>
+              <CardContent className="space-y-3">
                 {product.description && (
-                  <CardDescription className="mb-3">
+                  <CardDescription>
                     {product.description}
                   </CardDescription>
                 )}
-                {product.price && (
-                  <div className="text-2xl font-bold text-green-600">
-                    ${product.price}
-                  </div>
-                )}
+                <div className="flex items-center justify-between">
+                  {product.price && (
+                    <div className="text-2xl font-bold text-green-600">
+                      ${product.price}
+                    </div>
+                  )}
+                  <Button
+                    onClick={() => handleAddToCart(product)}
+                    className="bg-blue-600 hover:bg-blue-700"
+                    disabled={!product.price}
+                  >
+                    <ShoppingCart className="h-4 w-4 mr-2" />
+                    Add to Cart
+                  </Button>
+                </div>
               </CardContent>
             </Card>
           ))}
