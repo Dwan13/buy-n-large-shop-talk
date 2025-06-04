@@ -10,38 +10,31 @@ import { useCart } from "@/contexts/CartContext";
 import { toast } from "sonner";
 import { Link } from 'react-router-dom';
 import Breadcrumb from '@/components/Breadcrumb'; // Importa el componente Breadcrumb
+import ImageWithLoading from "@/components/ImageWithLoading";
+import ProductCardSkeleton from '@/components/ProductCardSkeleton'; // Importar el nuevo componente
+import styles from './Products.module.css'; // Importa tu CSS Module
 
-const Products = () => {
+const Products: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const { addToCart } = useCart();
 
-  const { data: products, isLoading, error } = useQuery({
+  const { data: products, isLoading, error } = useQuery<{
+    id: string;
+    name: string;
+    price?: number;
+    description?: string;
+    category?: string;
+    image_url?: string;
+  }[]>({ // Añadir isLoading y error
     queryKey: ['products'],
     queryFn: async () => {
-      console.log("Attempting to fetch products...");
-      const { data, error } = await supabase
-        .from('products')
-        .select('*')
-        .order('name');
-
-      if (error) {
-        console.error("Supabase fetch error:", error);
-        throw error;
-      }
-      console.log("Products fetched successfully:", data);
+      const { data, error } = await supabase.from('products').select('*');
+      if (error) throw error;
       return data;
     },
   });
 
-  // Get unique categories for the filter dropdown
-  const categories = useMemo(() => {
-    if (!products) return [];
-    const uniqueCategories = [...new Set(products.map(product => product.category).filter(Boolean))];
-    return uniqueCategories.sort();
-  }, [products]);
-
-  // Filter products based on search term and selected category
   const filteredProducts = useMemo(() => {
     if (!products) return [];
 
@@ -70,8 +63,12 @@ const Products = () => {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <Loader2 className="h-8 w-8 animate-spin" />
+      <div className="container mx-auto px-4 py-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          {Array.from({ length: 8 }).map((_, index) => (
+            <ProductCardSkeleton key={index} />
+          ))}
+        </div>
       </div>
     );
   }
@@ -90,10 +87,10 @@ const Products = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className={styles.productsContainer}>
       <div className="container mx-auto px-4 py-8">
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">Buy n Large Marketplace</h1>
+          <h1 className={styles.productTitle}>Buy n Large Marketplace</h1>
           <p className="text-xl text-gray-600">Everything you need, delivered to your door</p>
         </div>
 
@@ -123,7 +120,7 @@ const Products = () => {
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="all">All Categories</SelectItem>
-                {categories.map((category) => (
+                {Array.from(new Set(products?.map(p => p.category).filter(Boolean) || [])).map((category) => (
                   <SelectItem key={category} value={category}>
                     {category}
                   </SelectItem>
@@ -151,15 +148,12 @@ const Products = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {filteredProducts?.map((product) => (
             <Link to={`/products/${product.id}`} key={product.id}>
-              <Card className="hover:shadow-lg transition-shadow flex flex-col cursor-pointer">
+              <Card className={`${styles.productCard} hover:shadow-lg transition-shadow flex flex-col cursor-pointer`}>
                 <div className="aspect-square overflow-hidden rounded-t-lg bg-gray-200 flex items-center justify-center">
-                  <img
-                    src={product.image_url || "/placeholder.svg"}
+                  <ImageWithLoading
+                    src={product.image_url || '/placeholder.svg'}
                     alt={product.name}
-                    className="w-full h-full object-cover hover:scale-105 transition-transform"
-                    onError={(e) => {
-                      e.currentTarget.src = "/placeholder.svg";
-                    }}
+                    className="w-full h-full object-cover"
                   />
                 </div>
                 <CardHeader className="flex-grow">
@@ -176,7 +170,7 @@ const Products = () => {
                   )}
                   <div className="flex items-center justify-between mt-auto">
                     {product.price && (
-                      <div className="text-2xl font-bold text-green-600">
+                      <div className={`${styles.productPrice} text-2xl font-bold`}>
                         ${product.price}
                       </div>
                     )}
@@ -186,7 +180,7 @@ const Products = () => {
                         e.preventDefault(); // Evita que el botón siga el link
                         handleAddToCart(product);
                       }}
-                      className="bg-blue-600 hover:bg-blue-700"
+                      className={styles.addToCartButton}
                       disabled={!product.price}
                     >
                       <ShoppingCart className="h-4 w-4 mr-2" />
