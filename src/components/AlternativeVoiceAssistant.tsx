@@ -9,10 +9,6 @@ import styles from "./AlternativeVoiceAssistant.module.css"; // Import the CSS m
 import { Product, SearchResponse } from "@/types/product";
 import { SpeechRecognition } from "@/types/speech";
 
-// global.d.ts
-export {};
-
-
 
 const AlternativeVoiceAssistant = () => {
   const [isListening, setIsListening] = useState(false);
@@ -148,7 +144,7 @@ const AlternativeVoiceAssistant = () => {
           Pregúntame
         </CardTitle>
       </CardHeader>
-      <CardContent className="space-y-4">
+      <CardContent className={`${styles.conversationContainer} space-y-4`}>
         {/* Botones de control */}
         <div className={styles.controlButtons}> {/* Apply controlButtons class */}
           <Button
@@ -181,7 +177,7 @@ const AlternativeVoiceAssistant = () => {
         </div>
 
         {/* Conversación */}
-        <div className={`${styles.conversationContainer} space-y-3`}> {/* Apply conversationContainer class */}
+        <div className={` space-y-3`}> {/* Apply conversationContainer class */}
           {conversation.map((message, index) => (
             <div key={index} className={`${styles.messageWrapper} ${message.type === 'user' ? styles.userMessage : styles.assistantMessage}`}> {/* Apply messageWrapper, userMessage/assistantMessage classes */}
               <div className={`${styles.messageBubble} ${message.type === 'user' ? styles.userMessage : styles.assistantMessage}`}> {/* Apply messageBubble, userMessage/assistantMessage classes */}
