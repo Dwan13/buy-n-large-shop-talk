@@ -5,14 +5,8 @@ import { supabase } from '../integrations/supabase/client';
 import { Button } from '@/components/ui/button';
 import Breadcrumb from '@/components/Breadcrumb'; // Importa el componente Breadcrumb
 import ImageWithLoading from '@/components/ImageWithLoading';
+import { Product } from '@/types/product';
 
-interface Product {
-  id: string;
-  name: string;
-  description: string;
-  price: number;
-  image_url: string;
-}
 
 const ProductDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
