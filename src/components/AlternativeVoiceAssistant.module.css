@@ -94,6 +94,8 @@
 
 .product-display {
   display: flex;
+  /* Changed to allow wrapping if multiple products */
+  flex-wrap: wrap;
   align-items: center;
   gap: 15px;
   background-color: var(--bnl-background-color);
@@ -120,6 +122,20 @@
   margin: 0;
   color: var(--bnl-text-color);
   font-size: 0.9em;
+}
+
+/* Added styles for individual product items */
+.productItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  border: 1px solid var(--bnl-light-gray);
+  border-radius: 8px;
+  background-color: var(--bnl-background-color);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  flex: 1 1 auto; /* Allow items to grow and shrink */
+  min-width: 200px; /* Minimum width for each item */
 }
 
 .status-message {
@@ -156,6 +172,11 @@
 
 .note-box strong {
   color: var(--bnl-primary-color);
+}
+
+.conversationContainer{
+    max-height: 400px;
+    overflow: auto;
 }
 
 /* Animations */
