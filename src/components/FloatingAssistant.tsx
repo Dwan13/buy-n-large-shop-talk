@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { MessageCircle, X } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import VoiceAssistant from "./VoiceAssistant";
+import AlternativeVoiceAssistant from "./AlternativeVoiceAssistant";
 
 const FloatingAssistant = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -37,7 +37,7 @@ const FloatingAssistant = () => {
               <CardTitle className="text-lg">Asistente IA de Buy n Large</CardTitle>
             </CardHeader>
             <CardContent className="p-4">
-              <VoiceAssistant />
+              <AlternativeVoiceAssistant />
             </CardContent>
           </Card>
         </div>
