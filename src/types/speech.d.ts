@@ -1,12 +1,12 @@
 
-declare global {
+export declare global {
   interface Window {
     SpeechRecognition: typeof SpeechRecognition;
     webkitSpeechRecognition: typeof SpeechRecognition;
   }
 }
 
-interface SpeechRecognition extends EventTarget {
+export interface SpeechRecognition extends EventTarget {
   continuous: boolean;
   grammars: SpeechGrammarList;
   interimResults: boolean;

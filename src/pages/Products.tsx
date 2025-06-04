@@ -9,24 +9,18 @@ import { Loader2, Search, Filter, ShoppingCart } from "lucide-react";
 import { useCart } from "@/contexts/CartContext";
 import { toast } from "sonner";
 import { Link } from 'react-router-dom';
-import Breadcrumb from '@/components/Breadcrumb'; // Importa el componente Breadcrumb
+import Breadcrumb from '@/components/Breadcrumb';
 import ImageWithLoading from "@/components/ImageWithLoading";
-import ProductCardSkeleton from '@/components/ProductCardSkeleton'; // Importar el nuevo componente
-import styles from './Products.module.css'; // Importa tu CSS Module
+import ProductCardSkeleton from '@/components/ProductCardSkeleton'; 
+import styles from './Products.module.css'; 
+import { Product } from "@/types/product";
 
 const Products: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const { addToCart } = useCart();
 
-  const { data: products, isLoading, error } = useQuery<{
-    id: string;
-    name: string;
-    price?: number;
-    description?: string;
-    category?: string;
-    image_url?: string;
-  }[]>({ // Añadir isLoading y error
+  const { data: products, isLoading, error } = useQuery<Product[]>({ 
     queryKey: ['products'],
     queryFn: async () => {
       const { data, error } = await supabase.from('products').select('*');
