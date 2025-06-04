@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { MessageCircle, X } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import VoiceAssistant from "./VoiceAssistant";
 
 const FloatingAssistant = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -30,24 +31,13 @@ const FloatingAssistant = () => {
 
       {/* Assistant Panel */}
       {isOpen && (
-        <div className="fixed bottom-24 right-6 z-40 w-80 h-96">
-          <Card className="h-full shadow-xl">
+        <div className="fixed bottom-24 right-6 z-40 w-96">
+          <Card className="shadow-xl">
             <CardHeader className="bg-blue-600 text-white rounded-t-lg">
-              <CardTitle className="text-lg">Buy n Large Assistant</CardTitle>
+              <CardTitle className="text-lg">Asistente IA de Buy n Large</CardTitle>
             </CardHeader>
-            <CardContent className="flex-1 p-4 flex flex-col justify-center items-center text-center">
-              <MessageCircle className="h-12 w-12 text-blue-600 mb-4" />
-              <h3 className="text-lg font-semibold mb-2">Voice Assistant Coming Soon!</h3>
-              <p className="text-gray-600 mb-4">
-                Our AI-powered voice assistant will help you find products, answer questions, and provide personalized recommendations.
-              </p>
-              <Button 
-                variant="outline" 
-                disabled
-                className="cursor-not-allowed"
-              >
-                Start Voice Chat (Coming Soon)
-              </Button>
+            <CardContent className="p-4">
+              <VoiceAssistant />
             </CardContent>
           </Card>
         </div>
