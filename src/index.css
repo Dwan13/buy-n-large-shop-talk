@@ -49,6 +49,12 @@
     --sidebar-border: 220 13% 91%;
 
     --sidebar-ring: 217.2 91.2% 59.8%;
+
+    /* Custom Colors */
+    --bnl-primary: 220 13% 91%; /* Example: a light grey */
+    --bnl-secondary: 217.2 91.2% 59.8%; /* Example: a vibrant blue */
+    --bnl-text: 222.2 84% 4.9%; /* Example: dark text */
+    --bnl-background: 0 0% 100%; /* Example: white background */
   }
 
   .dark {
@@ -87,6 +93,12 @@
     --sidebar-accent-foreground: 240 4.8% 95.9%;
     --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 217.2 91.2% 59.8%;
+
+    /* Custom Colors for Dark Mode */
+    --bnl-primary: 217.2 32.6% 17.5%; /* Example: a dark grey */
+    --bnl-secondary: 212.7 26.8% 83.9%; /* Example: a lighter blue */
+    --bnl-text: 210 40% 98%; /* Example: light text */
+    --bnl-background: 222.2 84% 4.9%; /* Example: dark background */
   }
 }
 
@@ -95,7 +107,12 @@
     @apply border-border;
   }
 
+  /* REMOVED: @import './styles/variables.css'; */
+  /* Otros estilos globales */
+
   body {
-    @apply bg-background text-foreground;
+    font-family: sans-serif;
+    color: var(--bnl-text);
+    background-color: var(--bnl-background);
   }
 }

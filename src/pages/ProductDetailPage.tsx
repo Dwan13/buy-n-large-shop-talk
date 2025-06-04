@@ -4,6 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import { supabase } from '../integrations/supabase/client';
 import { Button } from '@/components/ui/button';
 import Breadcrumb from '@/components/Breadcrumb'; // Importa el componente Breadcrumb
+import ImageWithLoading from '@/components/ImageWithLoading';
 
 interface Product {
   id: string;
@@ -63,13 +64,10 @@ const ProductDetailPage: React.FC = () => {
       </div>
       <div className="flex flex-col md:flex-row gap-8">
         <div className="md:w-1/2">
-          <img
+          <ImageWithLoading
             src={product.image_url || '/placeholder.svg'}
             alt={product.name}
-            className="w-full h-auto object-cover rounded-lg shadow-md"
-            onError={(e) => {
-              e.currentTarget.src = '/placeholder.svg';
-            }}
+            className="w-full h-full object-cover"
           />
         </div>
         <div className="md:w-1/2">
