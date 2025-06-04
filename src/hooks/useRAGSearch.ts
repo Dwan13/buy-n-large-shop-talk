@@ -2,15 +2,7 @@
 import { useState } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
-
-interface Product {
-  id: string;
-  name: string;
-  description: string;
-  price: number;
-  category: string;
-  similarity: number;
-}
+import { Product } from '@/types/product';
 
 interface RAGResponse {
   query: string;
