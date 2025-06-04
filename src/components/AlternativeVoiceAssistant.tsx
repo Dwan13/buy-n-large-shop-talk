@@ -6,6 +6,56 @@ import { Mic, MicOff, Volume2, Loader2, MessageCircle } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 
+// global.d.ts
+export {};
+
+declare global {
+  interface SpeechRecognitionErrorEvent extends Event {
+    error: string;
+    message: string;
+  }
+
+  interface SpeechRecognitionEvent extends Event {
+    results: SpeechRecognitionResultList;
+  }
+
+  interface SpeechRecognition extends EventTarget {
+    lang: string;
+    continuous: boolean;
+    interimResults: boolean;
+    start(): void;
+    stop(): void;
+    abort(): void;
+    onaudioend: ((ev: Event) => any) | null;
+    onaudiostart: ((ev: Event) => any) | null;
+    onend: ((ev: Event) => any) | null;
+    onerror: ((ev: SpeechRecognitionErrorEvent) => any) | null;
+    onnomatch: ((ev: SpeechRecognitionEvent) => any) | null;
+    onresult: ((ev: SpeechRecognitionEvent) => any) | null;
+    onsoundend: ((ev: Event) => any) | null;
+    onsoundstart: ((ev: Event) => any) | null;
+    onspeechend: ((ev: Event) => any) | null;
+    onspeechstart: ((ev: Event) => any) | null;
+    onstart: ((ev: Event) => any) | null;
+  }
+
+  var SpeechRecognition: {
+    prototype: SpeechRecognition;
+    new (): SpeechRecognition;
+  };
+
+  var webkitSpeechRecognition: {
+    prototype: SpeechRecognition;
+    new (): SpeechRecognition;
+  }
+
+  interface Window {
+    SpeechRecognition: typeof SpeechRecognition;
+    webkitSpeechRecognition: typeof webkitSpeechRecognition;
+  }
+}
+
+
 interface Product {
   id: string;
   name: string;
@@ -108,7 +158,7 @@ const AlternativeVoiceAssistant = () => {
       // Buscar productos usando búsqueda simple
       console.log('Performing simple search...');
       const { data: searchData, error: searchError } = await supabase.functions.invoke('simple-search', {
-        body: { query: userText, maxResults: 5 }
+          body: { query: userText, maxResults: 5 }
       });
 
       if (searchError) {
