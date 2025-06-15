@@ -45,7 +45,7 @@
   }
 }
 
-@mixin 2xl {
+@mixin xxl {
   @include breakpoint(2xl) {
     @content;
   }
