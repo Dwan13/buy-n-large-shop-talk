@@ -1,99 +1,146 @@
 
 import { Button } from "@/components/ui/button";
-import { ShoppingBag, Truck, Shield, Heart } from "lucide-react";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { ArrowRight, Sparkles, ShoppingBag, Mic, Search, CreditCard, Users } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
+    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
       {/* Header */}
-      <header className="bg-white shadow-sm">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-2">
-              <ShoppingBag className="h-8 w-8 text-blue-600" />
-              <h1 className="text-2xl font-bold text-gray-900">Buy n Large</h1>
+      <header className="container mx-auto px-4 py-6">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center space-x-2">
+            <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
+              <span className="text-white font-bold text-sm">BnL</span>
             </div>
-            <nav className="flex items-center space-x-6">
-              <Link to="/" className="text-gray-700 hover:text-blue-600 transition-colors">
-                Home
-              </Link>
-              <Link to="/products" className="text-gray-700 hover:text-blue-600 transition-colors">
-                Products
-              </Link>
-              <Button asChild>
-                <Link to="/products">Shop Now</Link>
-              </Button>
-            </nav>
+            <h1 className="text-2xl font-bold text-gray-900">Buy n Large</h1>
           </div>
+          <nav className="hidden md:flex space-x-6">
+            <Link to="/products" className="text-gray-600 hover:text-gray-900">Productos</Link>
+            <Link to="/features" className="text-gray-600 hover:text-gray-900">
+              Características <Badge variant="secondary" className="ml-1">Nuevo</Badge>
+            </Link>
+          </nav>
         </div>
       </header>
 
       {/* Hero Section */}
-      <section className="py-20">
-        <div className="container mx-auto px-4 text-center">
+      <section className="container mx-auto px-4 py-16 text-center">
+        <div className="max-w-3xl mx-auto">
           <h2 className="text-5xl font-bold text-gray-900 mb-6">
-            Everything You Need, <span className="text-blue-600">Delivered</span>
+            El futuro del comercio está aquí
           </h2>
-          <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-            Welcome to Buy n Large - your one-stop marketplace for all of life's essentials. 
-            From everyday items to specialty products, we've got you covered.
+          <p className="text-xl text-gray-600 mb-8">
+            Descubre productos increíbles con nuestra plataforma potenciada por IA, 
+            autenticación empresarial y experiencia de compra revolucionaria.
           </p>
-          <div className="flex justify-center space-x-4">
-            <Button size="lg" asChild>
-              <Link to="/products">Browse Products</Link>
-            </Button>
-            <Button size="lg" variant="outline">
-              Learn More
-            </Button>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link to="/products">
+              <Button size="lg" className="bg-blue-600 hover:bg-blue-700">
+                <ShoppingBag className="mr-2 h-5 w-5" />
+                Explorar Productos
+              </Button>
+            </Link>
+            <Link to="/features">
+              <Button size="lg" variant="outline">
+                <Sparkles className="mr-2 h-5 w-5" />
+                Ver Características
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
 
-      {/* Features Section */}
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-4">
-          <h3 className="text-3xl font-bold text-center text-gray-900 mb-12">
-            Why Choose Buy n Large?
+      {/* Features Preview */}
+      <section className="container mx-auto px-4 py-16">
+        <div className="text-center mb-12">
+          <h3 className="text-3xl font-bold text-gray-900 mb-4">
+            Características Innovadoras
           </h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="text-center">
-              <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Truck className="h-8 w-8 text-blue-600" />
+          <p className="text-gray-600 max-w-2xl mx-auto">
+            Experimenta el comercio electrónico del futuro con nuestras funcionalidades avanzadas
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <Card className="text-center hover:shadow-lg transition-shadow">
+            <CardHeader>
+              <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mx-auto mb-4">
+                <Mic className="h-6 w-6 text-blue-600" />
               </div>
-              <h4 className="text-xl font-semibold mb-2">Fast Delivery</h4>
-              <p className="text-gray-600">Get your orders delivered quickly and efficiently to your doorstep.</p>
-            </div>
-            <div className="text-center">
-              <div className="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Shield className="h-8 w-8 text-green-600" />
+              <CardTitle className="text-lg">Asistente de Voz IA</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <CardDescription>
+                Habla naturalmente para buscar productos y obtener recomendaciones personalizadas
+              </CardDescription>
+            </CardContent>
+          </Card>
+
+          <Card className="text-center hover:shadow-lg transition-shadow">
+            <CardHeader>
+              <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mx-auto mb-4">
+                <Search className="h-6 w-6 text-green-600" />
               </div>
-              <h4 className="text-xl font-semibold mb-2">Secure Shopping</h4>
-              <p className="text-gray-600">Shop with confidence knowing your data and purchases are protected.</p>
-            </div>
-            <div className="text-center">
-              <div className="bg-red-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Heart className="h-8 w-8 text-red-600" />
+              <CardTitle className="text-lg">Búsqueda Inteligente</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <CardDescription>
+                Encuentra exactamente lo que necesitas con nuestra búsqueda potenciada por IA
+              </CardDescription>
+            </CardContent>
+          </Card>
+
+          <Card className="text-center hover:shadow-lg transition-shadow">
+            <CardHeader>
+              <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mx-auto mb-4">
+                <Users className="h-6 w-6 text-purple-600" />
               </div>
-              <h4 className="text-xl font-semibold mb-2">Customer Care</h4>
-              <p className="text-gray-600">Our dedicated support team is here to help you every step of the way.</p>
-            </div>
-          </div>
+              <CardTitle className="text-lg">Auth Empresarial</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <CardDescription>
+                Integración completa con Microsoft Azure para autenticación empresarial segura
+              </CardDescription>
+            </CardContent>
+          </Card>
+
+          <Card className="text-center hover:shadow-lg transition-shadow">
+            <CardHeader>
+              <div className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mx-auto mb-4">
+                <CreditCard className="h-6 w-6 text-orange-600" />
+              </div>
+              <CardTitle className="text-lg">Pagos Seguros</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <CardDescription>
+                Sistema de pagos robusto con múltiples métodos y procesamiento seguro
+              </CardDescription>
+            </CardContent>
+          </Card>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-gray-900 text-white py-8">
+      {/* Call to Action */}
+      <section className="bg-blue-600 py-16">
         <div className="container mx-auto px-4 text-center">
-          <div className="flex items-center justify-center space-x-2 mb-4">
-            <ShoppingBag className="h-6 w-6" />
-            <span className="text-xl font-bold">Buy n Large</span>
-          </div>
-          <p className="text-gray-400">
-            © 2024 Buy n Large. All rights reserved. Everything you need, delivered.
+          <h3 className="text-3xl font-bold text-white mb-4">
+            ¿Listo para experimentar el futuro?
+          </h3>
+          <p className="text-blue-100 mb-8 max-w-2xl mx-auto">
+            Únete a miles de usuarios que ya están disfrutando de la experiencia de compra más avanzada
           </p>
+          <Link to="/features">
+            <Button size="lg" variant="secondary">
+              <Sparkles className="mr-2 h-5 w-5" />
+              Probar Características
+            </Button>
+          </Link>
         </div>
-      </footer>
+      </section>
     </div>
   );
 };

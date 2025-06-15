@@ -8,9 +8,10 @@ import { CartProvider } from "@/contexts/CartContext";
 import Index from "./pages/Index";
 import Products from "./pages/Products";
 import NotFound from "./pages/NotFound";
+import MockFeatures from "./pages/MockFeatures";
 import FloatingAssistant from "./components/FloatingAssistant";
 import FloatingCart from "./components/FloatingCart";
-import ProductDetailPage from './pages/ProductDetailPage'; // Este sería el nuevo componente
+import ProductDetailPage from './pages/ProductDetailPage';
 
 const queryClient = new QueryClient();
 
@@ -24,7 +25,8 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/products" element={<Products />} />
-            <Route path="/products/:id" element={<ProductDetailPage />} /> {/* Nueva ruta */}
+            <Route path="/products/:id" element={<ProductDetailPage />} />
+            <Route path="/features" element={<MockFeatures />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
           <FloatingAssistant />
