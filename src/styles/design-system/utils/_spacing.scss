@@ -4,46 +4,73 @@
 // =============================================================================
 
 @use 'sass:map';
+@use 'sass:string';
 @use '../variables' as *;
 @use '../functions/spacing' as *;
 
+// Function to convert decimal keys to valid CSS class names
+@function escape-key($key) {
+  $key-string: '#{$key}';
+  @if string.index($key-string, '.') {
+    $key-string: string.str-replace($key-string, '.', '\\.');
+  }
+  @return $key-string;
+}
+
+// String replacement function
+@function str-replace($string, $search, $replace: '') {
+  $index: string.index($string, $search);
+  
+  @if $index {
+    @return string.slice($string, 1, $index - 1) + $replace + str-replace(string.slice($string, $index + string.length($search)), $search, $replace);
+  }
+  
+  @return $string;
+}
+
 // Generate margin utilities
 @each $key, $value in $spacing {
-  .u-m-#{$key} { margin: $value !important; }
-  .u-mx-#{$key} { 
+  $escaped-key: str-replace('#{$key}', '.', '_');
+  
+  .u-m-#{$escaped-key} { margin: $value !important; }
+  .u-mx-#{$escaped-key} { 
     margin-left: $value !important; 
     margin-right: $value !important; 
   }
-  .u-my-#{$key} { 
+  .u-my-#{$escaped-key} { 
     margin-top: $value !important; 
     margin-bottom: $value !important; 
   }
-  .u-mt-#{$key} { margin-top: $value !important; }
-  .u-mr-#{$key} { margin-right: $value !important; }
-  .u-mb-#{$key} { margin-bottom: $value !important; }
-  .u-ml-#{$key} { margin-left: $value !important; }
+  .u-mt-#{$escaped-key} { margin-top: $value !important; }
+  .u-mr-#{$escaped-key} { margin-right: $value !important; }
+  .u-mb-#{$escaped-key} { margin-bottom: $value !important; }
+  .u-ml-#{$escaped-key} { margin-left: $value !important; }
 }
 
 // Generate padding utilities
 @each $key, $value in $spacing {
-  .u-p-#{$key} { padding: $value !important; }
-  .u-px-#{$key} { 
+  $escaped-key: str-replace('#{$key}', '.', '_');
+  
+  .u-p-#{$escaped-key} { padding: $value !important; }
+  .u-px-#{$escaped-key} { 
     padding-left: $value !important; 
     padding-right: $value !important; 
   }
-  .u-py-#{$key} { 
+  .u-py-#{$escaped-key} { 
     padding-top: $value !important; 
     padding-bottom: $value !important; 
   }
-  .u-pt-#{$key} { padding-top: $value !important; }
-  .u-pr-#{$key} { padding-right: $value !important; }
-  .u-pb-#{$key} { padding-bottom: $value !important; }
-  .u-pl-#{$key} { padding-left: $value !important; }
+  .u-pt-#{$escaped-key} { padding-top: $value !important; }
+  .u-pr-#{$escaped-key} { padding-right: $value !important; }
+  .u-pb-#{$escaped-key} { padding-bottom: $value !important; }
+  .u-pl-#{$escaped-key} { padding-left: $value !important; }
 }
 
 // Gap utilities
 @each $key, $value in $spacing {
-  .u-gap-#{$key} { gap: $value !important; }
-  .u-gap-x-#{$key} { column-gap: $value !important; }
-  .u-gap-y-#{$key} { row-gap: $value !important; }
+  $escaped-key: str-replace('#{$key}', '.', '_');
+  
+  .u-gap-#{$escaped-key} { gap: $value !important; }
+  .u-gap-x-#{$escaped-key} { column-gap: $value !important; }
+  .u-gap-y-#{$escaped-key} { row-gap: $value !important; }
 }
