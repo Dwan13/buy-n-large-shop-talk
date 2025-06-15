@@ -3,6 +3,9 @@
 // DESIGN SYSTEM INDEX
 // =============================================================================
 
+// Import Sass built-in modules
+@use 'sass:map';
+
 // Base styles (includes CSS custom properties and base element styles)
 @use 'base';
 
