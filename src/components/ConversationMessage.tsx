@@ -1,7 +1,7 @@
 
 import { ConversationMessage } from "@/hooks/useVoiceProcessing";
 import { ProductDisplay } from "./ProductDisplay";
-import styles from "./AlternativeVoiceAssistant.module.css";
+import styles from "./ConversationMessage.module.css";
 
 interface ConversationMessageProps {
   message: ConversationMessage;

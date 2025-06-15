@@ -1,7 +1,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Mic, MicOff, Volume2, Loader2 } from "lucide-react";
-import styles from "./AlternativeVoiceAssistant.module.css";
+import styles from "./VoiceControlButtons.module.css";
 
 interface VoiceControlButtonsProps {
   isListening: boolean;

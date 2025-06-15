@@ -1,0 +1,46 @@
+
+.controlButtons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.micButton {
+  padding: 12px 25px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1em;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: var(--bnl-primary-color);
+  color: white;
+}
+
+.micButton:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+}
+
+.micButton.listening {
+  background-color: var(--bnl-danger-color);
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

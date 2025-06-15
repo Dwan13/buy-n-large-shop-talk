@@ -1,0 +1,27 @@
+
+.messageWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.messageBubble {
+  padding: 10px 15px;
+  border-radius: 8px;
+  max-width: 80%;
+  word-wrap: break-word;
+  line-height: 1.5;
+}
+
+.userMessage {
+  background-color: var(--bnl-primary-color);
+  color: white;
+  align-self: flex-end;
+  border-bottom-right-radius: 2px;
+}
+
+.assistantMessage {
+  background-color: var(--bnl-secondary-color);
+  color: white;
+  align-self: flex-start;
+  border-bottom-left-radius: 2px;
+}

@@ -1,6 +1,6 @@
 
 import { ProductEntity } from "@/domain/entities/Product";
-import styles from "./AlternativeVoiceAssistant.module.css";
+import styles from "./ProductDisplay.module.css";
 
 interface ProductDisplayProps {
   products: ProductEntity[];

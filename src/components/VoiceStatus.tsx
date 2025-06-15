@@ -1,5 +1,5 @@
 
-import styles from "./AlternativeVoiceAssistant.module.css";
+import styles from "./VoiceStatus.module.css";
 
 interface VoiceStatusProps {
   isListening: boolean;
