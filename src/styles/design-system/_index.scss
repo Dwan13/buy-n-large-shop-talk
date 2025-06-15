@@ -12,7 +12,7 @@
 // Variables and functions
 @use 'variables';
 @use 'functions/color';
-@use 'functions/spacing';
+@use 'functions/spacing' as spacing-fn;
 @use 'functions/typography' as typography-fn;
 
 // Mixins
@@ -23,7 +23,7 @@
 
 // Utilities
 @use 'utils/display';
-@use 'utils/spacing';
+@use 'utils/spacing' as spacing-utils;
 @use 'utils/typography';
 @use 'utils/colors';
 @use 'utils/animations';
