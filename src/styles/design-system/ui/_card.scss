@@ -4,13 +4,14 @@
 // =============================================================================
 
 @use 'sass:map';
-@use '../functions/color' as *;
-@use '../functions/spacing' as *;
+@use '../functions/color' as color-fn;
+@use '../functions/spacing' as spacing-fn;
+@use '../functions/typography' as typography-fn;
 @use '../variables' as *;
 
 .card {
   background-color: white;
-  border: 1px solid color(neutral, 200);
+  border: 1px solid color-fn.color(neutral, 200);
   border-radius: map.get($border-radius, lg);
   box-shadow: map.get($shadows, sm);
   overflow: hidden;
@@ -30,7 +31,7 @@
   }
   
   &.card--outlined {
-    border-color: color(neutral, 300);
+    border-color: color-fn.color(neutral, 300);
     box-shadow: none;
   }
   
@@ -41,30 +42,30 @@
 }
 
 .card__header {
-  padding: space(6);
-  border-bottom: 1px solid color(neutral, 200);
+  padding: spacing-fn.space(6);
+  border-bottom: 1px solid color-fn.color(neutral, 200);
 }
 
 .card__title {
   margin: 0;
-  font-weight: font-weight(semibold);
-  color: color(neutral, 900);
+  font-weight: typography-fn.font-weight(semibold);
+  color: color-fn.color(neutral, 900);
 }
 
 .card__description {
-  margin: space(1) 0 0 0;
-  color: color(neutral, 600);
-  font-size: font-size(sm);
+  margin: spacing-fn.space(1) 0 0 0;
+  color: color-fn.color(neutral, 600);
+  font-size: typography-fn.font-size(sm);
 }
 
 .card__content {
-  padding: space(6);
+  padding: spacing-fn.space(6);
 }
 
 .card__footer {
-  padding: space(6);
-  border-top: 1px solid color(neutral, 200);
-  background-color: color(neutral, 50);
+  padding: spacing-fn.space(6);
+  border-top: 1px solid color-fn.color(neutral, 200);
+  background-color: color-fn.color(neutral, 50);
 }
 
 // Card without dividers

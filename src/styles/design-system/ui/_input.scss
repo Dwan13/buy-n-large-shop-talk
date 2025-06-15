@@ -3,70 +3,70 @@
 // INPUT COMPONENT
 // =============================================================================
 
-@use '../functions/color' as *;
-@use '../functions/spacing' as *;
-@use '../functions/typography' as *;
-@use '../mixins/typography' as *;
-@use '../mixins/interactions' as *;
+@use '../functions/color' as color-fn;
+@use '../functions/spacing' as spacing-fn;
+@use '../functions/typography' as typography-fn;
+@use '../mixins/typography' as typography-mx;
+@use '../mixins/interactions' as interactions-mx;
 
 .input {
-  @include body-base;
+  @include typography-mx.body-base;
   
   width: 100%;
-  padding: space(2) space(3);
-  border: 1px solid color(neutral, 300);
+  padding: spacing-fn.space(2) spacing-fn.space(3);
+  border: 1px solid color-fn.color(neutral, 300);
   border-radius: 0.375rem;
   background-color: white;
-  color: color(neutral, 900);
+  color: color-fn.color(neutral, 900);
   transition: all 150ms ease;
   
   &::placeholder {
-    color: color(neutral, 500);
+    color: color-fn.color(neutral, 500);
   }
   
   &:focus {
     outline: none;
-    border-color: color(primary, 500);
+    border-color: color-fn.color(primary, 500);
     box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
   }
   
   &:disabled {
-    background-color: color(neutral, 100);
-    color: color(neutral, 500);
+    background-color: color-fn.color(neutral, 100);
+    color: color-fn.color(neutral, 500);
     cursor: not-allowed;
   }
   
   // Size variants
   &.input--sm {
-    @include typography(sm);
-    padding: space(1.5) space(2.5);
+    @include typography-mx.typography(sm);
+    padding: spacing-fn.space(1.5) spacing-fn.space(2.5);
   }
   
   &.input--md {
-    @include typography(base);
-    padding: space(2) space(3);
+    @include typography-mx.typography(base);
+    padding: spacing-fn.space(2) spacing-fn.space(3);
   }
   
   &.input--lg {
-    @include typography(lg);
-    padding: space(3) space(4);
+    @include typography-mx.typography(lg);
+    padding: spacing-fn.space(3) spacing-fn.space(4);
   }
   
   // State variants
   &.input--error {
-    border-color: color(danger, 500);
+    border-color: color-fn.color(danger, 500);
     
     &:focus {
-      border-color: color(danger, 500);
+      border-color: color-fn.color(danger, 500);
       box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
     }
   }
   
   &.input--success {
-    border-color: color(success, 500);
+    border-color: color-fn.color(success, 500);
     
     &:focus {
-      border-color: color(success, 500);
+      border-color: color-fn.color(success, 500);
       box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.1);
     }
   }
@@ -77,22 +77,22 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: space(2);
+  gap: spacing-fn.space(2);
 }
 
 .input-group__label {
-  @include label;
-  color: color(neutral, 700);
+  @include typography-mx.label;
+  color: color-fn.color(neutral, 700);
 }
 
 .input-group__help-text {
-  @include typography(sm);
-  color: color(neutral, 600);
+  @include typography-mx.typography(sm);
+  color: color-fn.color(neutral, 600);
 }
 
 .input-group__error {
-  @include typography(sm);
-  color: color(danger, 600);
+  @include typography-mx.typography(sm);
+  color: color-fn.color(danger, 600);
 }
 
 // Input with icon
@@ -100,15 +100,15 @@
   position: relative;
   
   .input {
-    padding-left: space(10);
+    padding-left: spacing-fn.space(10);
   }
   
   .input-with-icon__icon {
     position: absolute;
-    left: space(3);
+    left: spacing-fn.space(3);
     top: 50%;
     transform: translateY(-50%);
-    color: color(neutral, 500);
+    color: color-fn.color(neutral, 500);
     width: 1.25rem;
     height: 1.25rem;
   }

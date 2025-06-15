@@ -3,7 +3,7 @@
 // LAYOUT MIXINS
 // =============================================================================
 
-@use '../functions/spacing' as *;
+@use '../functions/spacing' as spacing-fn;
 
 /// Flexbox center mixin
 @mixin flex-center {
@@ -40,7 +40,7 @@
 /// Container mixin
 /// @param {String} $max-width - Maximum width
 /// @param {String} $padding - Horizontal padding
-@mixin container($max-width: 1200px, $padding: space(4)) {
+@mixin container($max-width: 1200px, $padding: spacing-fn.space(4)) {
   max-width: $max-width;
   margin: 0 auto;
   padding-left: $padding;

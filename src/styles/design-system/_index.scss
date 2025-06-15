@@ -11,15 +11,15 @@
 
 // Variables and functions
 @use 'variables';
-@use 'functions/color';
+@use 'functions/color' as color-fn;
 @use 'functions/spacing' as spacing-fn;
 @use 'functions/typography' as typography-fn;
 
 // Mixins
-@use 'mixins/layout';
+@use 'mixins/layout' as layout-mx;
 @use 'mixins/typography' as typography-mx;
-@use 'mixins/interactions';
-@use 'mixins/responsive';
+@use 'mixins/interactions' as interactions-mx;
+@use 'mixins/responsive' as responsive-mx;
 
 // Utilities
 @use 'utils/display';
@@ -36,7 +36,7 @@
 
 // Generate CSS custom properties for colors
 :root {
-  @include color.generate-color-properties();
+  @include color-fn.generate-color-properties();
 }
 
 // Base HTML styles
@@ -49,12 +49,12 @@ html {
 
 // Focus styles
 :focus-visible {
-  outline: 2px solid color.color(primary, 500);
+  outline: 2px solid color-fn.color(primary, 500);
   outline-offset: 2px;
 }
 
 // Selection styles
 ::selection {
-  background-color: color.color(primary, 100);
-  color: color.color(primary, 900);
+  background-color: color-fn.color(primary, 100);
+  color: color-fn.color(primary, 900);
 }

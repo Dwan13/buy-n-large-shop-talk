@@ -3,21 +3,21 @@
 // BUTTON COMPONENT
 // =============================================================================
 
-@use '../functions/color' as *;
-@use '../functions/spacing' as *;
-@use '../functions/typography' as *;
-@use '../mixins/typography' as *;
-@use '../mixins/interactions' as *;
+@use '../functions/color' as color-fn;
+@use '../functions/spacing' as spacing-fn;
+@use '../functions/typography' as typography-fn;
+@use '../mixins/typography' as typography-mx;
+@use '../mixins/interactions' as interactions-mx;
 
 .button {
-  @include body-base;
-  @include button-interactions;
+  @include typography-mx.body-base;
+  @include interactions-mx.button-interactions;
   
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: space(2);
-  padding: space(2) space(4);
+  gap: spacing-fn.space(2);
+  padding: spacing-fn.space(2) spacing-fn.space(4);
   border: 1px solid transparent;
   border-radius: 0.375rem;
   cursor: pointer;
@@ -26,14 +26,14 @@
   transition: all 150ms ease;
   
   &:focus-visible {
-    outline: 2px solid color(primary, 500);
+    outline: 2px solid color-fn.color(primary, 500);
     outline-offset: 2px;
   }
   
   // Size variants
   &.button--sm {
-    @include typography(sm);
-    padding: space(1.5) space(3);
+    @include typography-mx.typography(sm);
+    padding: spacing-fn.space(1.5) spacing-fn.space(3);
     
     .button__icon {
       width: 1rem;
@@ -42,8 +42,8 @@
   }
   
   &.button--md {
-    @include typography(base);
-    padding: space(2) space(4);
+    @include typography-mx.typography(base);
+    padding: spacing-fn.space(2) spacing-fn.space(4);
     
     .button__icon {
       width: 1.25rem;
@@ -52,8 +52,8 @@
   }
   
   &.button--lg {
-    @include typography(lg);
-    padding: space(3) space(6);
+    @include typography-mx.typography(lg);
+    padding: spacing-fn.space(3) spacing-fn.space(6);
     
     .button__icon {
       width: 1.5rem;
@@ -63,69 +63,69 @@
   
   // Color variants
   &.button--primary {
-    background-color: color(primary, 600);
+    background-color: color-fn.color(primary, 600);
     color: white;
     
     &:hover {
-      background-color: color(primary, 700);
+      background-color: color-fn.color(primary, 700);
     }
     
     &:active {
-      background-color: color(primary, 800);
+      background-color: color-fn.color(primary, 800);
     }
   }
   
   &.button--secondary {
-    background-color: color(secondary, 100);
-    color: color(secondary, 900);
-    border-color: color(secondary, 200);
+    background-color: color-fn.color(secondary, 100);
+    color: color-fn.color(secondary, 900);
+    border-color: color-fn.color(secondary, 200);
     
     &:hover {
-      background-color: color(secondary, 200);
+      background-color: color-fn.color(secondary, 200);
     }
     
     &:active {
-      background-color: color(secondary, 300);
+      background-color: color-fn.color(secondary, 300);
     }
   }
   
   &.button--outline {
     background-color: transparent;
-    color: color(primary, 600);
-    border-color: color(primary, 600);
+    color: color-fn.color(primary, 600);
+    border-color: color-fn.color(primary, 600);
     
     &:hover {
-      background-color: color(primary, 50);
+      background-color: color-fn.color(primary, 50);
     }
     
     &:active {
-      background-color: color(primary, 100);
+      background-color: color-fn.color(primary, 100);
     }
   }
   
   &.button--ghost {
     background-color: transparent;
-    color: color(primary, 600);
+    color: color-fn.color(primary, 600);
     
     &:hover {
-      background-color: color(primary, 50);
+      background-color: color-fn.color(primary, 50);
     }
     
     &:active {
-      background-color: color(primary, 100);
+      background-color: color-fn.color(primary, 100);
     }
   }
   
   &.button--danger {
-    background-color: color(danger, 600);
+    background-color: color-fn.color(danger, 600);
     color: white;
     
     &:hover {
-      background-color: color(danger, 700);
+      background-color: color-fn.color(danger, 700);
     }
     
     &:active {
-      background-color: color(danger, 800);
+      background-color: color-fn.color(danger, 800);
     }
   }
   
@@ -145,7 +145,7 @@
   
   // Icon button
   &.button--icon-only {
-    padding: space(2);
+    padding: spacing-fn.space(2);
     
     .button__icon {
       margin: 0;
