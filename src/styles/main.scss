@@ -3,13 +3,12 @@
 // MAIN STYLESHEET
 // =============================================================================
 
-// Import the design system
+// Import the design system (includes all base styles, utilities, and components)
 @use 'design-system/index';
 
-// Import Tailwind CSS (if still needed for existing components)
+// Import Tailwind CSS for existing components that still use it
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-// Custom project styles can be added here
-// Example: component-specific styles that don't belong in the design system
+// Additional project-specific styles can be added here if needed

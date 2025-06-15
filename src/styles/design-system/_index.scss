@@ -3,7 +3,10 @@
 // DESIGN SYSTEM INDEX
 // =============================================================================
 
-// Base imports
+// Base styles (includes CSS custom properties and base element styles)
+@use 'base';
+
+// Vendors
 @use 'vendors/normalize';
 
 // Variables and functions
@@ -23,6 +26,8 @@
 @use 'utils/spacing';
 @use 'utils/typography';
 @use 'utils/colors';
+@use 'utils/animations';
+@use 'utils/effects';
 
 // UI Components
 @use 'ui/button';
@@ -34,25 +39,12 @@
   @include color.generate-color-properties();
 }
 
-// Base styles
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
+// Base HTML styles
 html {
   font-family: map.get(variables.$font-families, sans);
   line-height: map.get(variables.$line-heights, normal);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-body {
-  margin: 0;
-  padding: 0;
-  color: color.color(neutral, 900);
-  background-color: color.color(neutral, 50);
 }
 
 // Focus styles
