@@ -3,7 +3,7 @@
 // TYPOGRAPHY MIXINS
 // =============================================================================
 
-@use '../functions/typography' as *;
+@use '../functions/typography' as typography-fn;
 
 /// Typography preset mixin
 /// @param {String} $size - Font size key
@@ -11,10 +11,10 @@
 /// @param {String} $height - Line height key
 /// @param {String} $family - Font family key
 @mixin typography($size: base, $weight: normal, $height: normal, $family: sans) {
-  font-family: font-family($family);
-  font-size: font-size($size);
-  font-weight: font-weight($weight);
-  line-height: line-height($height);
+  font-family: typography-fn.font-family($family);
+  font-size: typography-fn.font-size($size);
+  font-weight: typography-fn.font-weight($weight);
+  line-height: typography-fn.line-height($height);
 }
 
 /// Heading mixins

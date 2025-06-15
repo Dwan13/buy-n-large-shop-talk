@@ -13,11 +13,11 @@
 @use 'variables';
 @use 'functions/color';
 @use 'functions/spacing';
-@use 'functions/typography';
+@use 'functions/typography' as typography-fn;
 
 // Mixins
 @use 'mixins/layout';
-@use 'mixins/typography';
+@use 'mixins/typography' as typography-mx;
 @use 'mixins/interactions';
 @use 'mixins/responsive';
 
