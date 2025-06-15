@@ -1,14 +1,13 @@
-
 import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Mic, MicOff, Volume2, Loader2, MessageCircle } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import styles from "./AlternativeVoiceAssistant.module.css"; // Import the CSS module
-import { Product, SearchResponse } from "@/types/product";
+import styles from "./AlternativeVoiceAssistant.module.css";
+import { ProductEntity } from "@/domain/entities/Product";
+import { SearchResponse } from "@/types/product";
 import { SpeechRecognition } from "@/types/speech";
-
 
 const AlternativeVoiceAssistant = () => {
   const [isListening, setIsListening] = useState(false);
@@ -17,7 +16,7 @@ const AlternativeVoiceAssistant = () => {
   const [conversation, setConversation] = useState<Array<{
     type: 'user' | 'assistant';
     text: string;
-    products?: Product[];
+    products?: ProductEntity[];
   }>>([]);
   
   const recognitionRef = useRef<SpeechRecognition | null>(null);
@@ -107,11 +106,16 @@ const AlternativeVoiceAssistant = () => {
       const searchResponse: SearchResponse = searchData;
       console.log('Search Response:', searchResponse);
 
+      // Convert Product objects to ProductEntity instances
+      const productEntities = searchResponse.products.map(product => 
+        ProductEntity.fromApiResponse(product)
+      );
+
       // Agregar respuesta del asistente
       setConversation(prev => [...prev, { 
         type: 'assistant', 
         text: searchResponse.response,
-        products: searchResponse.products 
+        products: productEntities 
       }]);
 
       // Usar text-to-speech del navegador como fallback
