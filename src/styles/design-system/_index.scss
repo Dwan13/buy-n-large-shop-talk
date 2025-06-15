@@ -1,0 +1,68 @@
+
+// =============================================================================
+// DESIGN SYSTEM INDEX
+// =============================================================================
+
+// Base imports
+@use 'vendors/normalize';
+
+// Variables and functions
+@use 'variables';
+@use 'functions/color';
+@use 'functions/spacing';
+@use 'functions/typography';
+
+// Mixins
+@use 'mixins/layout';
+@use 'mixins/typography';
+@use 'mixins/interactions';
+@use 'mixins/responsive';
+
+// Utilities
+@use 'utils/display';
+@use 'utils/spacing';
+@use 'utils/typography';
+@use 'utils/colors';
+
+// UI Components
+@use 'ui/button';
+@use 'ui/card';
+@use 'ui/input';
+
+// Generate CSS custom properties for colors
+:root {
+  @include color.generate-color-properties();
+}
+
+// Base styles
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: map.get(variables.$font-families, sans);
+  line-height: map.get(variables.$line-heights, normal);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  color: color.color(neutral, 900);
+  background-color: color.color(neutral, 50);
+}
+
+// Focus styles
+:focus-visible {
+  outline: 2px solid color.color(primary, 500);
+  outline-offset: 2px;
+}
+
+// Selection styles
+::selection {
+  background-color: color.color(primary, 100);
+  color: color.color(primary, 900);
+}

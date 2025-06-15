@@ -1,0 +1,98 @@
+
+// =============================================================================
+// TYPOGRAPHY MIXINS
+// =============================================================================
+
+@use '../functions/typography' as *;
+
+/// Typography preset mixin
+/// @param {String} $size - Font size key
+/// @param {String} $weight - Font weight key
+/// @param {String} $height - Line height key
+/// @param {String} $family - Font family key
+@mixin typography($size: base, $weight: normal, $height: normal, $family: sans) {
+  font-family: font-family($family);
+  font-size: font-size($size);
+  font-weight: font-weight($weight);
+  line-height: line-height($height);
+}
+
+/// Heading mixins
+@mixin heading-1 {
+  @include typography(6xl, bold, tight, sans);
+}
+
+@mixin heading-2 {
+  @include typography(5xl, bold, tight, sans);
+}
+
+@mixin heading-3 {
+  @include typography(4xl, semibold, tight, sans);
+}
+
+@mixin heading-4 {
+  @include typography(3xl, semibold, snug, sans);
+}
+
+@mixin heading-5 {
+  @include typography(2xl, medium, snug, sans);
+}
+
+@mixin heading-6 {
+  @include typography(xl, medium, normal, sans);
+}
+
+/// Body text mixins
+@mixin body-large {
+  @include typography(lg, normal, relaxed, sans);
+}
+
+@mixin body-base {
+  @include typography(base, normal, normal, sans);
+}
+
+@mixin body-small {
+  @include typography(sm, normal, normal, sans);
+}
+
+/// Caption and label mixins
+@mixin caption {
+  @include typography(xs, medium, normal, sans);
+}
+
+@mixin label {
+  @include typography(sm, medium, normal, sans);
+}
+
+/// Code mixins
+@mixin code-inline {
+  @include typography(sm, normal, normal, mono);
+  background-color: var(--color-neutral-100);
+  padding: 0.125rem 0.25rem;
+  border-radius: 0.25rem;
+}
+
+@mixin code-block {
+  @include typography(sm, normal, relaxed, mono);
+  background-color: var(--color-neutral-900);
+  color: var(--color-neutral-100);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  overflow-x: auto;
+}
+
+/// Text truncation mixin
+@mixin truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/// Multi-line text truncation mixin
+/// @param {Number} $lines - Number of lines to show
+@mixin line-clamp($lines) {
+  display: -webkit-box;
+  -webkit-line-clamp: $lines;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}

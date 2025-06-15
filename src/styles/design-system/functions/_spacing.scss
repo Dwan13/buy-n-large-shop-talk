@@ -1,0 +1,33 @@
+
+// =============================================================================
+// SPACING FUNCTIONS
+// =============================================================================
+
+@use 'sass:map';
+@use '../variables' as *;
+
+/// Get a spacing value
+/// @param {String|Number} $size - Spacing size key
+/// @return {Length} - The spacing value
+@function space($size) {
+  $spacing-value: map.get($spacing, $size);
+  
+  @if not $spacing-value {
+    @error "Spacing '#{$size}' not found in spacing scale";
+  }
+  
+  @return $spacing-value;
+}
+
+/// Get multiple spacing values
+/// @param {List} $sizes - List of spacing size keys
+/// @return {List} - List of spacing values
+@function spaces($sizes...) {
+  $result: ();
+  
+  @each $size in $sizes {
+    $result: append($result, space($size));
+  }
+  
+  @return $result;
+}

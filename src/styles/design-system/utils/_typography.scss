@@ -1,0 +1,62 @@
+
+// =============================================================================
+// TYPOGRAPHY UTILITIES
+// =============================================================================
+
+@use 'sass:map';
+@use '../variables' as *;
+
+// Font family utilities
+@each $key, $value in $font-families {
+  .u-font-#{$key} { font-family: $value !important; }
+}
+
+// Font size utilities
+@each $key, $value in $font-sizes {
+  .u-text-#{$key} { font-size: $value !important; }
+}
+
+// Font weight utilities
+@each $key, $value in $font-weights {
+  .u-font-#{$key} { font-weight: $value !important; }
+}
+
+// Line height utilities
+@each $key, $value in $line-heights {
+  .u-leading-#{$key} { line-height: $value !important; }
+}
+
+// Text alignment utilities
+.u-text-left { text-align: left !important; }
+.u-text-center { text-align: center !important; }
+.u-text-right { text-align: right !important; }
+.u-text-justify { text-align: justify !important; }
+
+// Text decoration utilities
+.u-underline { text-decoration: underline !important; }
+.u-overline { text-decoration: overline !important; }
+.u-line-through { text-decoration: line-through !important; }
+.u-no-underline { text-decoration: none !important; }
+
+// Text transform utilities
+.u-uppercase { text-transform: uppercase !important; }
+.u-lowercase { text-transform: lowercase !important; }
+.u-capitalize { text-transform: capitalize !important; }
+.u-normal-case { text-transform: none !important; }
+
+// Text overflow utilities
+.u-truncate {
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+.u-text-ellipsis { text-overflow: ellipsis !important; }
+.u-text-clip { text-overflow: clip !important; }
+
+// White space utilities
+.u-whitespace-normal { white-space: normal !important; }
+.u-whitespace-nowrap { white-space: nowrap !important; }
+.u-whitespace-pre { white-space: pre !important; }
+.u-whitespace-pre-line { white-space: pre-line !important; }
+.u-whitespace-pre-wrap { white-space: pre-wrap !important; }

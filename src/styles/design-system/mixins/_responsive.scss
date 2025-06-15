@@ -1,0 +1,86 @@
+
+// =============================================================================
+// RESPONSIVE MIXINS
+// =============================================================================
+
+@use 'sass:map';
+@use '../variables' as *;
+
+/// Responsive breakpoint mixin
+/// @param {String} $breakpoint - Breakpoint key
+@mixin breakpoint($breakpoint) {
+  $breakpoint-value: map.get($breakpoints, $breakpoint);
+  
+  @if not $breakpoint-value {
+    @error "Breakpoint '#{$breakpoint}' not found in breakpoints map";
+  }
+  
+  @media (min-width: $breakpoint-value) {
+    @content;
+  }
+}
+
+/// Mobile first responsive mixins
+@mixin sm {
+  @include breakpoint(sm) {
+    @content;
+  }
+}
+
+@mixin md {
+  @include breakpoint(md) {
+    @content;
+  }
+}
+
+@mixin lg {
+  @include breakpoint(lg) {
+    @content;
+  }
+}
+
+@mixin xl {
+  @include breakpoint(xl) {
+    @content;
+  }
+}
+
+@mixin 2xl {
+  @include breakpoint(2xl) {
+    @content;
+  }
+}
+
+/// Max-width responsive mixin
+/// @param {String} $breakpoint - Breakpoint key
+@mixin max-breakpoint($breakpoint) {
+  $breakpoint-value: map.get($breakpoints, $breakpoint);
+  
+  @if not $breakpoint-value {
+    @error "Breakpoint '#{$breakpoint}' not found in breakpoints map";
+  }
+  
+  @media (max-width: $breakpoint-value - 1px) {
+    @content;
+  }
+}
+
+/// Between breakpoints mixin
+/// @param {String} $min-breakpoint - Minimum breakpoint
+/// @param {String} $max-breakpoint - Maximum breakpoint
+@mixin between-breakpoints($min-breakpoint, $max-breakpoint) {
+  $min-value: map.get($breakpoints, $min-breakpoint);
+  $max-value: map.get($breakpoints, $max-breakpoint);
+  
+  @if not $min-value {
+    @error "Breakpoint '#{$min-breakpoint}' not found in breakpoints map";
+  }
+  
+  @if not $max-value {
+    @error "Breakpoint '#{$max-breakpoint}' not found in breakpoints map";
+  }
+  
+  @media (min-width: $min-value) and (max-width: $max-value - 1px) {
+    @content;
+  }
+}

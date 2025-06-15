@@ -1,0 +1,179 @@
+
+// =============================================================================
+// BUTTON COMPONENT
+// =============================================================================
+
+@use '../functions/color' as *;
+@use '../functions/spacing' as *;
+@use '../functions/typography' as *;
+@use '../mixins/typography' as *;
+@use '../mixins/interactions' as *;
+
+.button {
+  @include body-base;
+  @include button-interactions;
+  
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: space(2);
+  padding: space(2) space(4);
+  border: 1px solid transparent;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+  transition: all 150ms ease;
+  
+  &:focus-visible {
+    outline: 2px solid color(primary, 500);
+    outline-offset: 2px;
+  }
+  
+  // Size variants
+  &.button--sm {
+    @include typography(sm);
+    padding: space(1.5) space(3);
+    
+    .button__icon {
+      width: 1rem;
+      height: 1rem;
+    }
+  }
+  
+  &.button--md {
+    @include typography(base);
+    padding: space(2) space(4);
+    
+    .button__icon {
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+  }
+  
+  &.button--lg {
+    @include typography(lg);
+    padding: space(3) space(6);
+    
+    .button__icon {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+  }
+  
+  // Color variants
+  &.button--primary {
+    background-color: color(primary, 600);
+    color: white;
+    
+    &:hover {
+      background-color: color(primary, 700);
+    }
+    
+    &:active {
+      background-color: color(primary, 800);
+    }
+  }
+  
+  &.button--secondary {
+    background-color: color(secondary, 100);
+    color: color(secondary, 900);
+    border-color: color(secondary, 200);
+    
+    &:hover {
+      background-color: color(secondary, 200);
+    }
+    
+    &:active {
+      background-color: color(secondary, 300);
+    }
+  }
+  
+  &.button--outline {
+    background-color: transparent;
+    color: color(primary, 600);
+    border-color: color(primary, 600);
+    
+    &:hover {
+      background-color: color(primary, 50);
+    }
+    
+    &:active {
+      background-color: color(primary, 100);
+    }
+  }
+  
+  &.button--ghost {
+    background-color: transparent;
+    color: color(primary, 600);
+    
+    &:hover {
+      background-color: color(primary, 50);
+    }
+    
+    &:active {
+      background-color: color(primary, 100);
+    }
+  }
+  
+  &.button--danger {
+    background-color: color(danger, 600);
+    color: white;
+    
+    &:hover {
+      background-color: color(danger, 700);
+    }
+    
+    &:active {
+      background-color: color(danger, 800);
+    }
+  }
+  
+  // State variants
+  &.button--loading {
+    opacity: 0.7;
+    cursor: wait;
+    pointer-events: none;
+  }
+  
+  &:disabled,
+  &[aria-disabled="true"] {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+  
+  // Icon button
+  &.button--icon-only {
+    padding: space(2);
+    
+    .button__icon {
+      margin: 0;
+    }
+  }
+  
+  // Full width
+  &.button--full-width {
+    width: 100%;
+  }
+}
+
+// Icon within button
+.button__icon {
+  flex-shrink: 0;
+  transition: transform 150ms ease;
+}
+
+// Loading spinner
+.button__spinner {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

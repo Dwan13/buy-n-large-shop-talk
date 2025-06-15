@@ -1,0 +1,73 @@
+
+// =============================================================================
+// DESIGN SYSTEM EXAMPLE COMPONENT
+// =============================================================================
+
+@use '../../styles/design-system/functions/color' as *;
+@use '../../styles/design-system/functions/spacing' as *;
+@use '../../styles/design-system/mixins/layout' as *;
+@use '../../styles/design-system/mixins/typography' as *;
+
+.example {
+  @include container(600px);
+  padding-top: space(8);
+  padding-bottom: space(8);
+}
+
+.card {
+  @extend .card;
+  @extend .card--elevated;
+}
+
+.cardHeader {
+  @extend .card__header;
+}
+
+.cardTitle {
+  @extend .card__title;
+  @include heading-4;
+}
+
+.cardDescription {
+  @extend .card__description;
+}
+
+.cardContent {
+  @extend .card__content;
+}
+
+.cardFooter {
+  @extend .card__footer;
+  @include flex-between;
+  gap: space(3);
+}
+
+.inputGroup {
+  @extend .input-group;
+}
+
+.inputLabel {
+  @extend .input-group__label;
+}
+
+.input {
+  @extend .input;
+  @extend .input--md;
+}
+
+.inputHelp {
+  @extend .input-group__help-text;
+}
+
+.button {
+  @extend .button;
+  @extend .button--md;
+}
+
+.buttonPrimary {
+  @extend .button--primary;
+}
+
+.buttonSecondary {
+  @extend .button--secondary;
+}

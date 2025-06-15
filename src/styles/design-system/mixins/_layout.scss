@@ -1,0 +1,66 @@
+
+// =============================================================================
+// LAYOUT MIXINS
+// =============================================================================
+
+@use '../functions/spacing' as *;
+
+/// Flexbox center mixin
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/// Flexbox column mixin
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+/// Flexbox row mixin
+@mixin flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+/// Flex between mixin
+@mixin flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/// Grid center mixin
+@mixin grid-center {
+  display: grid;
+  place-items: center;
+}
+
+/// Container mixin
+/// @param {String} $max-width - Maximum width
+/// @param {String} $padding - Horizontal padding
+@mixin container($max-width: 1200px, $padding: space(4)) {
+  max-width: $max-width;
+  margin: 0 auto;
+  padding-left: $padding;
+  padding-right: $padding;
+}
+
+/// Aspect ratio mixin
+/// @param {Number} $width - Aspect ratio width
+/// @param {Number} $height - Aspect ratio height
+@mixin aspect-ratio($width, $height) {
+  aspect-ratio: #{$width} / #{$height};
+}
+
+/// Sticky footer mixin
+@mixin sticky-footer {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  
+  main {
+    flex: 1;
+  }
+}

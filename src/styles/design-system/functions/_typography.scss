@@ -1,0 +1,59 @@
+
+// =============================================================================
+// TYPOGRAPHY FUNCTIONS
+// =============================================================================
+
+@use 'sass:map';
+@use '../variables' as *;
+
+/// Get a font size
+/// @param {String} $size - Font size key
+/// @return {Length} - The font size value
+@function font-size($size) {
+  $size-value: map.get($font-sizes, $size);
+  
+  @if not $size-value {
+    @error "Font size '#{$size}' not found in font size scale";
+  }
+  
+  @return $size-value;
+}
+
+/// Get a font weight
+/// @param {String} $weight - Font weight key
+/// @return {Number} - The font weight value
+@function font-weight($weight) {
+  $weight-value: map.get($font-weights, $weight);
+  
+  @if not $weight-value {
+    @error "Font weight '#{$weight}' not found in font weight scale";
+  }
+  
+  @return $weight-value;
+}
+
+/// Get a line height
+/// @param {String} $height - Line height key
+/// @return {Number} - The line height value
+@function line-height($height) {
+  $height-value: map.get($line-heights, $height);
+  
+  @if not $height-value {
+    @error "Line height '#{$height}' not found in line height scale";
+  }
+  
+  @return $height-value;
+}
+
+/// Get a font family
+/// @param {String} $family - Font family key
+/// @return {List} - The font family stack
+@function font-family($family) {
+  $family-value: map.get($font-families, $family);
+  
+  @if not $family-value {
+    @error "Font family '#{$family}' not found in font family scale";
+  }
+  
+  @return $family-value;
+}

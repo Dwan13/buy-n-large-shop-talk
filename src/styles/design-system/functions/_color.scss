@@ -1,0 +1,44 @@
+
+// =============================================================================
+// COLOR FUNCTIONS
+// =============================================================================
+
+@use 'sass:map';
+@use '../variables' as *;
+
+/// Get a color from the color palette
+/// @param {String} $color - Color name
+/// @param {Number} $shade - Color shade (50-950)
+/// @return {Color} - The color value
+@function color($color, $shade: 500) {
+  $color-map: map.get($colors, $color);
+  
+  @if not $color-map {
+    @error "Color '#{$color}' not found in color palette";
+  }
+  
+  $color-value: map.get($color-map, $shade);
+  
+  @if not $color-value {
+    @error "Shade '#{$shade}' not found for color '#{$color}'";
+  }
+  
+  @return $color-value;
+}
+
+/// Create a CSS custom property for a color
+/// @param {String} $name - Property name
+/// @param {String} $color - Color name
+/// @param {Number} $shade - Color shade
+@mixin color-property($name, $color, $shade: 500) {
+  --#{$name}: #{color($color, $shade)};
+}
+
+/// Generate all color custom properties
+@mixin generate-color-properties() {
+  @each $color-name, $color-map in $colors {
+    @each $shade, $value in $color-map {
+      --color-#{$color-name}-#{$shade}: #{$value};
+    }
+  }
+}

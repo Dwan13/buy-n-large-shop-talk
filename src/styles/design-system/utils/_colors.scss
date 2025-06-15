@@ -1,0 +1,38 @@
+
+// =============================================================================
+// COLOR UTILITIES
+// =============================================================================
+
+@use 'sass:map';
+@use '../variables' as *;
+
+// Generate text color utilities
+@each $color-name, $color-map in $colors {
+  @each $shade, $value in $color-map {
+    .u-text-#{$color-name}-#{$shade} { color: $value !important; }
+  }
+}
+
+// Generate background color utilities
+@each $color-name, $color-map in $colors {
+  @each $shade, $value in $color-map {
+    .u-bg-#{$color-name}-#{$shade} { background-color: $value !important; }
+  }
+}
+
+// Generate border color utilities
+@each $color-name, $color-map in $colors {
+  @each $shade, $value in $color-map {
+    .u-border-#{$color-name}-#{$shade} { border-color: $value !important; }
+  }
+}
+
+// Semantic color utilities
+.u-text-current { color: currentColor !important; }
+.u-text-transparent { color: transparent !important; }
+
+.u-bg-current { background-color: currentColor !important; }
+.u-bg-transparent { background-color: transparent !important; }
+
+.u-border-current { border-color: currentColor !important; }
+.u-border-transparent { border-color: transparent !important; }

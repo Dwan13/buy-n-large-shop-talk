@@ -1,0 +1,77 @@
+
+// =============================================================================
+// CARD COMPONENT
+// =============================================================================
+
+@use 'sass:map';
+@use '../functions/color' as *;
+@use '../functions/spacing' as *;
+@use '../variables' as *;
+
+.card {
+  background-color: white;
+  border: 1px solid color(neutral, 200);
+  border-radius: map.get($border-radius, lg);
+  box-shadow: map.get($shadows, sm);
+  overflow: hidden;
+  transition: box-shadow 150ms ease;
+  
+  &:hover {
+    box-shadow: map.get($shadows, md);
+  }
+  
+  // Card variants
+  &.card--elevated {
+    box-shadow: map.get($shadows, lg);
+    
+    &:hover {
+      box-shadow: map.get($shadows, xl);
+    }
+  }
+  
+  &.card--outlined {
+    border-color: color(neutral, 300);
+    box-shadow: none;
+  }
+  
+  &.card--flat {
+    border: none;
+    box-shadow: none;
+  }
+}
+
+.card__header {
+  padding: space(6);
+  border-bottom: 1px solid color(neutral, 200);
+}
+
+.card__title {
+  margin: 0;
+  font-weight: font-weight(semibold);
+  color: color(neutral, 900);
+}
+
+.card__description {
+  margin: space(1) 0 0 0;
+  color: color(neutral, 600);
+  font-size: font-size(sm);
+}
+
+.card__content {
+  padding: space(6);
+}
+
+.card__footer {
+  padding: space(6);
+  border-top: 1px solid color(neutral, 200);
+  background-color: color(neutral, 50);
+}
+
+// Card without dividers
+.card--seamless {
+  .card__header,
+  .card__footer {
+    border: none;
+    background-color: transparent;
+  }
+}
