@@ -6,11 +6,19 @@ import MockAuthButton from '@/components/MockAuthButton';
 import MockCheckout from '@/components/MockCheckout';
 import SemanticSearch from '@/components/SemanticSearch';
 import AlternativeVoiceAssistant from '@/components/AlternativeVoiceAssistant';
+import Breadcrumb from '@/components/Breadcrumb';
 
 const MockFeatures = () => {
   return (
     <div className="min-h-screen bg-gray-50 py-8">
       <div className="container mx-auto px-4">
+        <div className="mb-4">
+          <Breadcrumb items={[
+            { label: 'Home', path: '/' }, 
+            { label: 'Features', path: '/features' }
+          ]} />
+        </div>
+
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">
             Buy n Large - Funcionalidades Avanzadas
