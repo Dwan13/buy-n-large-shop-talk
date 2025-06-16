@@ -77,7 +77,7 @@ const featuredProducts: FeaturedProduct[] = [
 
 const FeaturedProductsCarousel = () => {
   return (
-    <section className="py-16 bg-gradient-to-r from-blue-50 via-white to-purple-50">
+    <section className="py-16 bg-gradient-to-r from-blue-50 via-white to-purple-50 overflow-hidden">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12 animate-fade-in">
           <Badge variant="secondary" className="mb-4 animate-scale-in">
@@ -91,7 +91,7 @@ const FeaturedProductsCarousel = () => {
           </p>
         </div>
 
-        <div className="relative animate-slide-in-right">
+        <div className="relative animate-slide-in-right px-4 py-8">
           <Carousel
             opts={{
               align: "start",
@@ -101,52 +101,55 @@ const FeaturedProductsCarousel = () => {
           >
             <CarouselContent className="-ml-2 md:-ml-4">
               {featuredProducts.map((product, index) => (
-                <CarouselItem key={product.id} className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3">
-                  <div className="group relative">
-                    <Card className="h-full transition-all duration-300 hover:shadow-2xl hover:scale-105 hover:-translate-y-2 bg-white/80 backdrop-blur-sm border-0 shadow-lg">
-                      <CardContent className="p-0">
-                        <div className="relative overflow-hidden rounded-t-lg">
+                <CarouselItem key={product.id} className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3 pb-8">
+                  <div className="group relative perspective-1000 h-full">
+                    <Card className="h-full transition-all duration-500 ease-out group-hover:shadow-2xl group-hover:scale-[1.02] bg-white/90 backdrop-blur-sm border-0 shadow-lg overflow-hidden transform-gpu will-change-transform group-hover:-translate-y-4">
+                      <CardContent className="p-0 h-full flex flex-col">
+                        <div className="relative overflow-hidden rounded-t-lg flex-shrink-0">
                           {product.badge && (
                             <Badge 
-                              className={`absolute top-3 left-3 z-10 animate-bounce ${
-                                product.badge === 'Oferta' ? 'bg-red-500' :
-                                product.badge === 'Nuevo' ? 'bg-green-500' :
-                                'bg-blue-500'
+                              className={`absolute top-3 left-3 z-10 animate-bounce transition-all duration-300 group-hover:scale-110 ${
+                                product.badge === 'Oferta' ? 'bg-red-500 hover:bg-red-600' :
+                                product.badge === 'Nuevo' ? 'bg-green-500 hover:bg-green-600' :
+                                'bg-blue-500 hover:bg-blue-600'
                               }`}
                             >
                               {product.badge}
                             </Badge>
                           )}
-                          <ImageWithLoading
-                            src={product.image}
-                            alt={product.name}
-                            className="w-full h-48 transition-transform duration-500 group-hover:scale-110"
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                          <div className="relative overflow-hidden">
+                            <ImageWithLoading
+                              src={product.image}
+                              alt={product.name}
+                              className="w-full h-48 transition-all duration-700 ease-out group-hover:scale-125 group-hover:rotate-1"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500" />
+                            <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-all duration-500" />
+                          </div>
                         </div>
                         
-                        <div className="p-6">
-                          <div className="flex items-center justify-between mb-2">
-                            <Badge variant="outline" className="text-xs">
+                        <div className="p-6 flex flex-col flex-grow">
+                          <div className="flex items-center justify-between mb-3">
+                            <Badge variant="outline" className="text-xs transition-all duration-300 group-hover:bg-blue-50 group-hover:border-blue-300 group-hover:text-blue-700">
                               {product.category}
                             </Badge>
-                            <div className="flex items-center space-x-1">
-                              <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                              <span className="text-sm text-gray-600">{product.rating}</span>
+                            <div className="flex items-center space-x-1 transition-all duration-300 group-hover:scale-110">
+                              <Star className="h-4 w-4 fill-yellow-400 text-yellow-400 transition-all duration-300 group-hover:fill-yellow-500 group-hover:text-yellow-500" />
+                              <span className="text-sm text-gray-600 group-hover:text-gray-800 transition-colors duration-300">{product.rating}</span>
                             </div>
                           </div>
                           
-                          <h3 className="font-semibold text-lg mb-3 text-gray-900 group-hover:text-blue-600 transition-colors duration-300">
+                          <h3 className="font-semibold text-lg mb-4 text-gray-900 group-hover:text-blue-600 transition-all duration-300 line-clamp-2 flex-grow">
                             {product.name}
                           </h3>
                           
-                          <div className="flex items-center justify-between">
+                          <div className="flex items-center justify-between mt-auto">
                             <div className="flex items-center space-x-2">
-                              <span className="text-2xl font-bold text-blue-600">
+                              <span className="text-2xl font-bold text-blue-600 transition-all duration-300 group-hover:text-blue-700 group-hover:scale-105">
                                 ${product.price}
                               </span>
                               {product.originalPrice && (
-                                <span className="text-sm text-gray-500 line-through">
+                                <span className="text-sm text-gray-500 line-through transition-all duration-300 group-hover:text-red-500">
                                   ${product.originalPrice}
                                 </span>
                               )}
@@ -155,9 +158,9 @@ const FeaturedProductsCarousel = () => {
                             <Link to={`/products/${product.id}`}>
                               <Button 
                                 size="sm" 
-                                className="bg-blue-600 hover:bg-blue-700 transform transition-all duration-200 hover:scale-110 shadow-lg hover:shadow-xl"
+                                className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 transform transition-all duration-300 hover:scale-125 hover:rotate-3 shadow-lg hover:shadow-2xl group-hover:animate-pulse"
                               >
-                                <ShoppingBag className="h-4 w-4" />
+                                <ShoppingBag className="h-4 w-4 transition-transform duration-300 group-hover:scale-110" />
                               </Button>
                             </Link>
                           </div>
@@ -168,8 +171,8 @@ const FeaturedProductsCarousel = () => {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious className="hidden md:flex -left-12 bg-white/90 backdrop-blur-sm hover:bg-white hover:scale-110 transition-all duration-200 shadow-lg" />
-            <CarouselNext className="hidden md:flex -right-12 bg-white/90 backdrop-blur-sm hover:bg-white hover:scale-110 transition-all duration-200 shadow-lg" />
+            <CarouselPrevious className="hidden md:flex -left-12 bg-white/90 backdrop-blur-sm hover:bg-white hover:scale-125 transition-all duration-300 shadow-lg hover:shadow-2xl border-2 border-transparent hover:border-blue-200" />
+            <CarouselNext className="hidden md:flex -right-12 bg-white/90 backdrop-blur-sm hover:bg-white hover:scale-125 transition-all duration-300 shadow-lg hover:shadow-2xl border-2 border-transparent hover:border-blue-200" />
           </Carousel>
         </div>
 
@@ -178,10 +181,10 @@ const FeaturedProductsCarousel = () => {
             <Button 
               size="lg" 
               variant="outline" 
-              className="bg-white/80 backdrop-blur-sm hover:bg-white hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl border-2 border-blue-200 hover:border-blue-400"
+              className="bg-white/80 backdrop-blur-sm hover:bg-white hover:scale-110 transition-all duration-300 shadow-lg hover:shadow-2xl border-2 border-blue-200 hover:border-blue-400 group"
             >
               Ver Todos los Productos
-              <ShoppingBag className="ml-2 h-5 w-5" />
+              <ShoppingBag className="ml-2 h-5 w-5 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-12" />
             </Button>
           </Link>
         </div>
